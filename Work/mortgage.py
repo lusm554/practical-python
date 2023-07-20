@@ -23,6 +23,7 @@ while principal > 0:
     principal -= extra_payment
   month_cnt += 1
   #print(month_cnt, round(total_paid, 2), round(principal, 2))
+  print(f"{month_cnt} {total_paid:0.2f} {principal:0.2f}")
 
 print('Total paid', total_paid)
 print('Month', month_cnt)
