@@ -20,8 +20,10 @@ while principal > 0:
 		total_paid += extra_payment
 		principal -= extra_payment
 	month_cnt += 1
+	print(month_cnt, total_paid, principal)
 
 print('Total paid', total_paid)
+print('Month', month_cnt)
 
 
 
