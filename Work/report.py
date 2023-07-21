@@ -23,17 +23,29 @@ def read_prices(filename):
   prices = {}
   with open(filename, 'rt') as f:
     rows = csv.reader(f)
-    header = next(rows)
     for row in rows:
       try:
         name, price = row
-        prices[name] = price
+        prices[name] = float(price)
       except ValueError:
         print('Couldn\'t parse', row)
   return prices
 
-test = read_prices('Data/prices.csv')
-pprint(test)
+prices = read_prices('Data/prices.csv')
+pprint(prices)
+portfolio = read_portfolio('Data/portfolio.csv')
+pprint(portfolio)
 
-#test = read_portfolio('Data/portfolio.csv')
-#pprint(test)
+# calc portf cost
+total_cost = 0.0
+for p in portfolio:
+  total_cost += p['price'] * p['shares']
+print(f"{total_cost=}")
+
+# current cost of portf
+current_cost = 0.0
+for p in portfolio:
+  current_cost += p['shares'] * prices[p['name']]
+print(f"{current_cost=}")
+
+print("Gain", current_cost - total_cost)
