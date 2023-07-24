@@ -36,16 +36,11 @@ pprint(prices)
 portfolio = read_portfolio('Data/portfolio.csv')
 pprint(portfolio)
 
-# calc portf cost
 total_cost = 0.0
-for p in portfolio:
-  total_cost += p['price'] * p['shares']
-print(f"{total_cost=}")
-
-# current cost of portf
 current_cost = 0.0
 for p in portfolio:
+  total_cost += p['price'] * p['shares']
   current_cost += p['shares'] * prices[p['name']]
+print(f"{total_cost=}")
 print(f"{current_cost=}")
-
 print("Gain", current_cost - total_cost)
