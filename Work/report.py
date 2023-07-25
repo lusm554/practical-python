@@ -19,6 +19,7 @@ def read_portfolio(filename):
       portfolio.append(curr_share)
   return portfolio
 
+
 def read_prices(filename):
   prices = {}
   with open(filename, 'rt') as f:
@@ -31,16 +32,19 @@ def read_prices(filename):
         print('Couldn\'t parse', row)
   return prices
 
-prices = read_prices('Data/prices.csv')
-pprint(prices)
-portfolio = read_portfolio('Data/portfolio.csv')
-pprint(portfolio)
 
-total_cost = 0.0
-current_cost = 0.0
-for p in portfolio:
-  total_cost += p['price'] * p['shares']
-  current_cost += p['shares'] * prices[p['name']]
-print(f"{total_cost=}")
-print(f"{current_cost=}")
-print("Gain", current_cost - total_cost)
+def make_report(portfolio, prices):
+  report = []
+  for p in portfolio:
+    name, shares = p['name'], p['shares']
+    price = prices[name]
+    change = round(price - p['price'], 2)
+    row = (name, shares, price, change)
+    report.append(row)
+  return report
+
+prices = read_prices('Data/prices.csv')
+portfolio = read_portfolio('Data/portfolio.csv')
+report = make_report(portfolio, prices)
+pprint(report)
+
