@@ -29,7 +29,8 @@ def read_prices(filename):
         name, price = row
         prices[name] = float(price)
       except ValueError:
-        print('Couldn\'t parse', row)
+        pass
+        #print('Couldn\'t parse', row)
   return prices
 
 
@@ -46,6 +47,11 @@ def make_report(portfolio, prices):
 prices = read_prices('Data/prices.csv')
 portfolio = read_portfolio('Data/portfolio.csv')
 report = make_report(portfolio, prices)
+
+headers = ('Name', 'Shares', 'Price', 'Change')
+separator = ('-' * 10,) * 4
+print('%10s %10s %10s %10s' % headers)
+print('%s %s %s %s' % separator)
 for r in report:
   print('%10s %10d %10.2f %10.2f' % r)
 
