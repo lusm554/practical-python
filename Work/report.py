@@ -52,7 +52,7 @@ headers = ('Name', 'Shares', 'Price', 'Change')
 separator = ('-' * 10,) * 4
 print('%10s %10s %10s %10s' % headers)
 print('%s %s %s %s' % separator)
-for r in report:
-  print('%10s %10d %10.2f %10.2f' % r)
 
+for name, shares, price, change in report:
+  print('%10s %10d %10s %10.2f' % (name, shares, ("$%.2f" % price), change))
 
