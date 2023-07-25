@@ -46,5 +46,7 @@ def make_report(portfolio, prices):
 prices = read_prices('Data/prices.csv')
 portfolio = read_portfolio('Data/portfolio.csv')
 report = make_report(portfolio, prices)
-pprint(report)
+for r in report:
+  print('%10s %10d %10.2f %10.2f' % r)
+
 
