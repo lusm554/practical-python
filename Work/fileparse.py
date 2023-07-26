@@ -9,18 +9,14 @@ def parse_csv(filename: str, select: list = None, types: list = None, has_header
   """
   with open(filename, 'rt') as f:
     rows = csv.reader(f, delimiter=delimiter)
-    if has_headers:
-      header = next(rows)
+    header = next(rows) if has_headers else []
     if select:
       indices = [header.index(colname) for colname in select]
-      if types:
-        types = [types[index] for index in indices]
-    else:
-      indices = []
+      header = select
     records = []
     for row in rows:
       if not row: continue # skip empty rows
-      if indices:
+      if select:
         row = [row[index] for index in indices]
       if types:
         row = [cast(val) for val, cast in zip(row, types)]
@@ -39,8 +35,9 @@ pprint(p)
 p = parse_csv('Data/portfolio.csv', select=['name', 'price'])
 pprint(p)
 
-p = parse_csv('Data/portfolio.csv', select=['name', 'price'], types=[str, int, float])
-pprint(p)
+# it's good idea for handle this exception, but course leads the other way 
+#p = parse_csv('Data/portfolio.csv', select=['name', 'price'], types=[str, int, float])
+#pprint(p)
 
 p = parse_csv('Data/portfolio.csv', types=[str, int, float])
 pprint(p)
