@@ -3,13 +3,14 @@
 # Exercise 3.3
 import csv
 
-def parse_csv(filename: str, select: list = None, types: list = None) -> list[dict]:
+def parse_csv(filename: str, select: list = None, types: list = None, has_headers: bool = True) -> list[dict]:
   """
   Parse a CSV files into a list of records.
   """
   with open(filename, 'rt') as f:
     rows = csv.reader(f)
-    header = next(rows)
+    if has_headers:
+      header = next(rows)
     if select:
       indices = [header.index(colname) for colname in select]
       if types:
@@ -23,7 +24,10 @@ def parse_csv(filename: str, select: list = None, types: list = None) -> list[di
         row = [row[index] for index in indices]
       if types:
         row = [cast(val) for val, cast in zip(row, types)]
-      record = dict(zip(header, row))
+      if has_headers:
+        record = dict(zip(header, row))
+      else:
+        record = tuple(row)
       records.append(record)
   return records
 
@@ -41,3 +45,5 @@ pprint(p)
 p = parse_csv('Data/portfolio.csv', types=[str, int, float])
 pprint(p)
 
+p = parse_csv('Data/prices.csv', types=[str,float], has_headers=False)
+pprint(p)
