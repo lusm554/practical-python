@@ -49,7 +49,10 @@ def print_report(report):
   for name, shares, price, change in report:
     print('%10s %10d %10s %10.2f' % (name, shares, ("$%.2f" % price), change))
 
-prices = read_prices('Data/prices.csv')
-portfolio = read_portfolio('Data/portfolio.csv')
-report = make_report(portfolio, prices)
-print_report(report)
+def portfolio_report(portfoliofile, pricesfile):
+  portfolio = read_portfolio(portfoliofile)
+  prices = read_prices(pricesfile)
+  report = make_report(portfolio, prices)
+  print_report(report)
+
+portfolio_report('Data/portfolio.csv', 'Data/prices.csv')
