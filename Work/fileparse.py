@@ -3,12 +3,12 @@
 # Exercise 3.3
 import csv
 
-def parse_csv(filename: str, select: list = None, types: list = None, has_headers: bool = True) -> list[dict]:
+def parse_csv(filename: str, select: list = None, types: list = None, has_headers: bool = True, delimiter: str = ',') -> list[dict]:
   """
   Parse a CSV files into a list of records.
   """
   with open(filename, 'rt') as f:
-    rows = csv.reader(f)
+    rows = csv.reader(f, delimiter=delimiter)
     if has_headers:
       header = next(rows)
     if select:
@@ -46,4 +46,7 @@ p = parse_csv('Data/portfolio.csv', types=[str, int, float])
 pprint(p)
 
 p = parse_csv('Data/prices.csv', types=[str,float], has_headers=False)
+pprint(p)
+
+p = parse_csv('Data/portfolio.dat', types=[str, int, float], delimiter=' ')
 pprint(p)
