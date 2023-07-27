@@ -31,11 +31,11 @@ def print_report(report, formatter):
     rowdata = [ name, str(shares), f'{price:0.2f}', f'{change:0.2f}' ]
     formatter.row(rowdata)
 
-def portfolio_report(portfoliofile, pricesfile):
+def portfolio_report(portfoliofile, pricesfile, fmt='txt'):
   portfolio = read_portfolio(portfoliofile)
   prices = read_prices(pricesfile)
   report = make_report(portfolio, prices)
-  formatter = tableformat.HTMLTableFormatter()
+  formatter = tableformat.create_formatter(fmt)
   print_report(report, formatter)
 
 def main(argv):
