@@ -16,6 +16,9 @@ else:
   filename = 'Data/portfolio.csv'
 
 def main(argv):
-  script, portf = argv
+  scriptname, portf = argv
   cost = portfolio_cost(portf)
   print(f"Total cost: {cost}")
+
+if __name__ == '__main__':
+  main(sys.argv)

@@ -3,6 +3,7 @@
 # Exercise 2.4
 from pprint import pprint
 import fileparse
+import sys
 
 def read_portfolio(filename):
   portfolio = fileparse.parse_csv(filename, types=[str, int, float])
@@ -40,8 +41,8 @@ def portfolio_report(portfoliofile, pricesfile):
 
 def main(argv):
   #portfolio_report('Data/portfolio.csv', 'Data/prices.csv')
-  script, portf, prices = argv
+  scriptname, portf, prices = argv
   portfolio_report(portf, prices)
 
-#if __name__ == '__main__':
-  #main()
+if __name__ == '__main__':
+  main(sys.argv)
