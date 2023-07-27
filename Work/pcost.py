@@ -15,5 +15,7 @@ if len(sys.argv) == 2:
 else:
   filename = 'Data/portfolio.csv'
 
-cost = portfolio_cost(filename)
-print(f"{cost=}")
+def main(argv):
+  script, portf = argv
+  cost = portfolio_cost(portf)
+  print(f"Total cost: {cost}")
