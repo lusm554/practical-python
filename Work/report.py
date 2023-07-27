@@ -3,10 +3,10 @@
 # Exercise 2.4
 from pprint import pprint
 import fileparse
-import sys
+import stock
 
 def read_portfolio(filename):
-  portfolio = fileparse.parse_csv(filename, types=[str, int, float])
+  portfolio = [ stock.Stock(*p.values()) for p in fileparse.parse_csv(filename, types=[str, int, float]) ]
   return portfolio
 
 
@@ -18,9 +18,9 @@ def read_prices(filename):
 def make_report(portfolio, prices):
   report = []
   for p in portfolio:
-    name, shares = p['name'], p['shares']
+    name, shares = p.name, p.shares 
     price = prices[name]
-    change = round(price - p['price'], 2)
+    change = round(price - p.price, 2)
     row = (name, shares, price, change)
     report.append(row)
   return report
@@ -45,4 +45,5 @@ def main(argv):
   portfolio_report(portf, prices)
 
 if __name__ == '__main__':
+  import sys
   main(sys.argv)
