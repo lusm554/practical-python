@@ -3,7 +3,14 @@
 # Exercise 3.3
 import csv
 
-def parse_csv(filename: str, select: list = None, types: list = None, has_headers: bool = True, delimiter: str = ',') -> list[dict]:
+def parse_csv(
+  filename: str,
+  select: list = None,
+  types: list = None,
+  has_headers: bool = True,
+  delimiter: str = ',',
+  silence_errors: bool = False
+) -> list[dict]:
   """
   Parse a CSV files into a list of records.
   """
@@ -29,8 +36,9 @@ def parse_csv(filename: str, select: list = None, types: list = None, has_header
           record = tuple(row)
         records.append(record)
       except ValueError as error:
-        print(f"Row {rowno}: Couldn't convert {row}")
-        print(f"Row {rowno}: Reason {error}")
+        if not silence_errors:
+          print(f"Row {rowno}: Couldn't convert {row}")
+          print(f"Row {rowno}: Reason {error}")
   return records
 
 # TEST CASE
