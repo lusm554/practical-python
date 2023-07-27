@@ -3,7 +3,6 @@
 # Exercise 2.4
 from pprint import pprint
 import fileparse
-import csv # remove
 
 def read_portfolio(filename):
   portfolio = fileparse.parse_csv(filename, types=[str, int, float])
@@ -39,4 +38,4 @@ def portfolio_report(portfoliofile, pricesfile):
   report = make_report(portfolio, prices)
   print_report(report)
 
-portfolio_report('Data/portfolio.csv', 'Data/prices.csv')
+#portfolio_report('Data/portfolio.csv', 'Data/prices.csv')
