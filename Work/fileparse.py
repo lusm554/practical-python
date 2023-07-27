@@ -42,6 +42,7 @@ def parse_csv(
   return records
 
 # TEST CASE
+"""
 from pprint import pprint
 p = parse_csv('Data/portfolio.csv')
 pprint(p)
@@ -61,3 +62,4 @@ pprint(p)
 
 p = parse_csv('Data/portfolio.dat', types=[str, int, float], delimiter=' ')
 pprint(p)
+"""
