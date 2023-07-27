@@ -40,8 +40,8 @@ def portfolio_report(portfoliofile, pricesfile, fmt='txt'):
 
 def main(argv):
   #portfolio_report('Data/portfolio.csv', 'Data/prices.csv')
-  scriptname, portf, prices = argv
-  portfolio_report(portf, prices)
+  scriptname, portf, prices, fmt = argv
+  portfolio_report(portf, prices, fmt)
 
 if __name__ == '__main__':
   import sys
