@@ -38,4 +38,5 @@ def portfolio_report(portfoliofile, pricesfile):
   report = make_report(portfolio, prices)
   print_report(report)
 
-#portfolio_report('Data/portfolio.csv', 'Data/prices.csv')
+if __name__ == '__main__':
+  portfolio_report('Data/portfolio.csv', 'Data/prices.csv')

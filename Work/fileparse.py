@@ -41,25 +41,24 @@ def parse_csv(
           print(f"Row {rowno}: Reason {error}")
   return records
 
-# TEST CASE
-"""
-from pprint import pprint
-p = parse_csv('Data/portfolio.csv')
-pprint(p)
+if __name__ == '__main__':
+  # TEST CASE
+  from pprint import pprint
+  p = parse_csv('Data/portfolio.csv')
+  pprint(p)
 
-p = parse_csv('Data/portfolio.csv', select=['name', 'price'])
-pprint(p)
+  p = parse_csv('Data/portfolio.csv', select=['name', 'price'])
+  pprint(p)
 
-# it's good idea for handle this exception, but course leads the other way 
-#p = parse_csv('Data/portfolio.csv', select=['name', 'price'], types=[str, int, float])
-#pprint(p)
+  # it's good idea for handle this exception, but course leads the other way 
+  #p = parse_csv('Data/portfolio.csv', select=['name', 'price'], types=[str, int, float])
+  #pprint(p)
 
-p = parse_csv('Data/portfolio.csv', types=[str, int, float])
-pprint(p)
+  p = parse_csv('Data/portfolio.csv', types=[str, int, float])
+  pprint(p)
 
-p = parse_csv('Data/prices.csv', types=[str,float], has_headers=False)
-pprint(p)
+  p = parse_csv('Data/prices.csv', types=[str,float], has_headers=False)
+  pprint(p)
 
-p = parse_csv('Data/portfolio.dat', types=[str, int, float], delimiter=' ')
-pprint(p)
-"""
+  p = parse_csv('Data/portfolio.dat', types=[str, int, float], delimiter=' ')
+  pprint(p)
