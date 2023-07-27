@@ -4,7 +4,7 @@
 import csv
 
 def parse_csv(
-  filename: str,
+  sourceobj: [str, list],
   select: list = None,
   types: list = None,
   has_headers: bool = True,
@@ -16,29 +16,33 @@ def parse_csv(
   """
   if select is not None and has_headers == False:
     raise RuntimeError('select argument requires column headers')
-  with open(filename, 'rt') as f:
-    rows = csv.reader(f, delimiter=delimiter)
-    header = next(rows) if has_headers else []
-    if select:
-      indices = [header.index(colname) for colname in select]
-      header = select
-    records = []
-    for rowno, row in enumerate(rows):
-      try:
-        if not row: continue # skip empty rows
-        if select:
-          row = [row[index] for index in indices]
-        if types:
-          row = [cast(val) for val, cast in zip(row, types)]
-        if has_headers:
-          record = dict(zip(header, row))
-        else:
-          record = tuple(row)
-        records.append(record)
-      except ValueError as error:
-        if not silence_errors:
-          print(f"Row {rowno}: Couldn't convert {row}")
-          print(f"Row {rowno}: Reason {error}")
+  if isinstance(sourceobj, str):
+    with open(sourceobj, 'rt') as f:
+      lines = [row for row in f]
+  else:
+    lines = sourceobj
+  rows = csv.reader(lines, delimiter=delimiter)
+  header = next(rows) if has_headers else []
+  if select:
+    indices = [header.index(colname) for colname in select]
+    header = select
+  records = []
+  for rowno, row in enumerate(rows):
+    try:
+      if not row: continue # skip empty rows
+      if select:
+        row = [row[index] for index in indices]
+      if types:
+        row = [cast(val) for val, cast in zip(row, types)]
+      if has_headers:
+        record = dict(zip(header, row))
+      else:
+        record = tuple(row)
+      records.append(record)
+    except ValueError as error:
+      if not silence_errors:
+        print(f"Row {rowno}: Couldn't convert {row}")
+        print(f"Row {rowno}: Reason {error}")
   return records
 
 if __name__ == '__main__':
