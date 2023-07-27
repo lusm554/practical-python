@@ -16,17 +16,21 @@ def parse_csv(filename: str, select: list = None, types: list = None, has_header
       indices = [header.index(colname) for colname in select]
       header = select
     records = []
-    for row in rows:
-      if not row: continue # skip empty rows
-      if select:
-        row = [row[index] for index in indices]
-      if types:
-        row = [cast(val) for val, cast in zip(row, types)]
-      if has_headers:
-        record = dict(zip(header, row))
-      else:
-        record = tuple(row)
-      records.append(record)
+    for rowno, row in enumerate(rows):
+      try:
+        if not row: continue # skip empty rows
+        if select:
+          row = [row[index] for index in indices]
+        if types:
+          row = [cast(val) for val, cast in zip(row, types)]
+        if has_headers:
+          record = dict(zip(header, row))
+        else:
+          record = tuple(row)
+        records.append(record)
+      except ValueError as error:
+        print(f"Row {rowno}: Couldn't convert {row}")
+        print(f"Row {rowno}: Reason {error}")
   return records
 
 # TEST CASE
