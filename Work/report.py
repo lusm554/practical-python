@@ -27,13 +27,7 @@ def make_report(portfolio, prices):
 
 def print_report(report, formatter):
   formatter.headings(('Name', 'Shares', 'Price', 'Change'))
-  """
-  separator = ('-' * 10,) * 4
-  print('%10s %10s %10s %10s' % headers)
-  print('%s %s %s %s' % separator)
-  """
   for name, shares, price, change in report:
-    #print('%10s %10d %10s %10.2f' % (name, shares, ("$%.2f" % price), change))
     rowdata = [ name, str(shares), f'{price:0.2f}', f'{change:0.2f}' ]
     formatter.row(rowdata)
 
@@ -41,7 +35,7 @@ def portfolio_report(portfoliofile, pricesfile):
   portfolio = read_portfolio(portfoliofile)
   prices = read_prices(pricesfile)
   report = make_report(portfolio, prices)
-  formatter = tableformat.TableFormatter()
+  formatter = tableformat.HTMLTableFormatter()
   print_report(report, formatter)
 
 def main(argv):
