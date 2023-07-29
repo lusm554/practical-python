@@ -1,5 +1,6 @@
 # lusm554 .gitignore
 *.swp
+stocklog.csv
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
