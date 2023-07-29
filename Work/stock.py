@@ -1,4 +1,5 @@
 class Stock:
+  __slots__ = ('name', '_shares', 'price') # adding some optimization, when class used as data structure
   def __init__(self, name, shares, price):
     self.name = name
     self.shares = shares
