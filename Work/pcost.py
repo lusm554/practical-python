@@ -6,9 +6,8 @@ import csv
 import report
 
 def portfolio_cost(filepath):
-  prices = report.read_portfolio(filepath)
-  total_cost = sum([ p.cost for p in prices ])
-  return total_cost
+  portfolio = report.read_portfolio(filepath)
+  return portfolio.total_cost
 
 if len(sys.argv) == 2:
   filename = sys.argv[1]

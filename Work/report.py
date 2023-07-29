@@ -5,11 +5,12 @@ from pprint import pprint
 import fileparse
 import stock
 import tableformat
+from portfolio import Portfolio
 
 
 def read_portfolio(filename):
   portfolio = [ stock.Stock(*p.values()) for p in fileparse.parse_csv(filename, types=[str, int, float]) ]
-  return portfolio
+  return Portfolio(portfolio)
 
 def read_prices(filename):
   prices = dict(fileparse.parse_csv(filename, types=[str, float], has_headers=False))
