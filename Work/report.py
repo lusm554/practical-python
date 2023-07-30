@@ -8,8 +8,8 @@ import tableformat
 from portfolio import Portfolio
 
 
-def read_portfolio(filename):
-  portfolio = [ stock.Stock(**p) for p in fileparse.parse_csv(filename, types=[str, int, float]) ]
+def read_portfolio(filename, **opts):
+  portfolio = [ stock.Stock(**p) for p in fileparse.parse_csv(filename, types=[str, int, float], **opts) ]
   return Portfolio(portfolio)
 
 def read_prices(filename):
