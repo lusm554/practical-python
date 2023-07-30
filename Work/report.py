@@ -9,7 +9,7 @@ from portfolio import Portfolio
 
 
 def read_portfolio(filename):
-  portfolio = [ stock.Stock(*p.values()) for p in fileparse.parse_csv(filename, types=[str, int, float]) ]
+  portfolio = [ stock.Stock(**p) for p in fileparse.parse_csv(filename, types=[str, int, float]) ]
   return Portfolio(portfolio)
 
 def read_prices(filename):
