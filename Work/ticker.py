@@ -1,7 +1,9 @@
 # ticker.py
 
 from follow import follow
+import report
 import csv
+import tableformat
 
 def select_columns(rows, indices):
   for row in rows:
@@ -27,16 +29,21 @@ def parse_stock_data(lines):
   rows = make_dicts(rows, ['name', 'price', 'change'])
   return rows
 
-if __name__ == '__main__':
-  """
+def ticker(portfile, logfile, fmt):
+  portfolio = report.read_portfolio(portfile)
   lines = follow('Data/stocklog.csv')
   rows = parse_stock_data(lines)
-  for row in rows:
-    print(row)
-  """
-  import report
-  portfolio = report.read_portfolio('Data/portfolio.csv')
-  rows = parse_stock_data(follow('Data/stocklog.csv'))
   rows = filter_symbols(rows, portfolio)
+  formatter = tableformat.create_formatter(fmt)
+  formatter.headings(['Name', 'Prices', 'Change'])
   for row in rows:
-    print(row)
+    formatter.row([ row['name'], f"{row['price']:0.2f}", f"{row['change']:0.2f}"] )
+  
+def main(argv):
+  if len(argv) < 4:
+    raise SystemExit('Usage: %s portfoliofile logfile fmt' % argv[0])
+  ticker(*argv[1:])
+
+if __name__ == '__main__':
+  import sys
+  main(sys.argv)
