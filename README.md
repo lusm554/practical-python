@@ -1,7 +1,7 @@
 # Source repo >>> [GitHub Repo](https://github.com/dabeaz-course/practical-python)
 
 # lusm544 notes
-Here some practice in python.
+Here some practice in python. Main code in `./Work/*.py` dir.
 
 # Welcome!
 
