@@ -1,4 +1,4 @@
-from typedproperty import String, Integer, Float
+from .typedproperty import String, Integer, Float
 
 class Stock:
   __slots__ = ('_name', '_shares', '_price') # adding some optimization, when class used as data structure

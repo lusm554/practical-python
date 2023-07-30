@@ -2,10 +2,10 @@
 #
 # Exercise 2.4
 from pprint import pprint
-import fileparse
-import stock
-import tableformat
-from portfolio import Portfolio
+from . import fileparse
+from . import stock
+from . import tableformat
+from .portfolio import Portfolio
 import logging
 
 logging.basicConfig(
