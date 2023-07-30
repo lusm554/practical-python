@@ -1,6 +1,6 @@
 # typedproperty.py
 
-def typedporperty(name, expected_type):
+def typedproperty(name, expected_type):
   private_name = '_' + name
   @property
   def prop(self):
